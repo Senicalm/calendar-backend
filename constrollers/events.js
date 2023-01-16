@@ -3,8 +3,7 @@ const Evento = require("../models/Evento");
 
 const getEventos = async(req, res = response) => {
   const eventos = await Evento.find().populate('user','name email');
-
-  res.status(400).json({
+  res.status(200).json({
     ok: true,
     eventos
   });
@@ -14,10 +13,10 @@ const crearEvento = async (req, res = response) => {
   const evento = new Evento(req.body);
   try {
     evento.user = req.uid;
-    const eventoGurdado = await evento.save();
-    res.status(400).json({
+    const eventoGuardado = await evento.save();
+    res.status(200).json({
       ok: true,
-      evento: eventoGurdado,
+      evento: eventoGuardado,
     });
   } catch (error) {
     console.log(error);
